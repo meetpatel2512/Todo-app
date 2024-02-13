@@ -29,9 +29,10 @@ export default class index extends Component {
 
     addTodo = event => {
         event.preventDefault();
+        const { Todotext } = this.state;
 
-        if (this.state.Todotext !== '') {
-            this.setState(({ Todotext, TodoList }) => (
+        if (Todotext !== '') {
+            this.setState(({ TodoList }) => (
                 {
                     TodoList: [
                         ...TodoList,
@@ -41,11 +42,11 @@ export default class index extends Component {
                 }
             )
             )
-            return null;
+            return;
         }
-        
-            alert("please Enter a valid text")
-        
+
+        alert("please Enter a valid text")
+
     };
 
     toggleTodo = item => {
