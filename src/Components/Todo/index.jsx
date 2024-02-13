@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+
 
 export default class index extends Component {
     state = {
@@ -10,18 +23,29 @@ export default class index extends Component {
     };
 
     changevalue = event => {
-        this.setState(() => ({ Todotext: event.target.value }));
+        this.setState({ Todotext: event.target.value });
+
     };
 
     addTodo = event => {
         event.preventDefault();
-        this.setState(({ Todotext, TodoList }) => ({
-            TodoList: [
-                ...TodoList,
-                { id: new Date().valueOf(), text: Todotext, isDone: false },
-            ],
-            Todotext: '',
-        }));
+
+        if (this.state.Todotext !== '') {
+            this.setState(({ Todotext, TodoList }) => (
+                {
+                    TodoList: [
+                        ...TodoList,
+                        { id: new Date().valueOf(), text: Todotext, isDone: false },
+                    ],
+                    Todotext: ""
+                }
+            )
+            )
+            return null;
+        }
+        
+            alert("please Enter a valid text")
+        
     };
 
     toggleTodo = item => {
@@ -49,17 +73,19 @@ export default class index extends Component {
     };
 
     render() {
-        const { TodoList } = this.state;
+        const { TodoList, Todotext } = this.state;
         return (
             <div className="flex flex-col min-h-screen mx-3 gap-5">
                 <div className="flex justify-center text-4xl capitalize my-8">
                     <h1>apna todo app</h1>
                 </div>
+
+
                 <form onSubmit={this.addTodo} className="flex justify-center">
                     <Input
-                        className="basis-96 rounded-r-none capitalize"
+                        className="basis-96 rounded-r-none"
                         placeholder="enter todo here..."
-                        onChange={this.changevalue}
+                        onChange={this.changevalue} value={Todotext}
                     />
                     <Button
                         type="submit"
@@ -78,13 +104,30 @@ export default class index extends Component {
                             >
                                 {item.text}
                             </p>
-                            <Button
+                            <AlertDialog>
+                                <AlertDialogTrigger className='bg-red-600 hover:bg-red-400 px-5 text-white py-1 rounded-lg'>Delete</AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you sure to want delete this todo?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action cannot be undone. This will permanently delete your Todo
+                                            and remove your todo from our servers.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction onClick={() => this.DeleteTodo(item)}>Continue</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+
+                            {/* <Button
                                 variant="outline"
                                 className="bg-red-600 hover:bg-red-400 text-white capitalize"
                                 onClick={() => this.DeleteTodo(item)}
                             >
                                 delete
-                            </Button>
+                            </Button> */}
                         </div>
                     ))}
                 </div>
