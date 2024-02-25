@@ -1,0 +1,34 @@
+{
+  "todolist": [
+    {
+      "id": "5271",
+      "text": "Learn HTML",
+      "isDone": false
+    },
+    {
+      "id": "03db",
+      "text": "Learn Js",
+      "isDone": false
+    },
+    {
+      "id": "8777",
+      "text": "Learn Next js",
+      "isDone": false
+    },
+    {
+      "id": "efcf",
+      "text": "Learn CSS",
+      "isDone": false
+    },
+    {
+      "id": "9865",
+      "text": "Learn React Js",
+      "isDone": false
+    },
+    {
+      "id": "b0e4",
+      "text": "Learn PHP",
+      "isDone": false
+    }
+  ]
+}

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Todo from './Components/Todo/index'
 
-const App = () => {
+function App() {
   return (
     <div>
       <Todo />
@@ -9,4 +9,4 @@ const App = () => {
   )
 }
 
-export default App
+export default memo(App)
